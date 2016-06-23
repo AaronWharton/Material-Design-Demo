@@ -1,6 +1,9 @@
 package com.example.asus1.materialdesigndemo.ui.activity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,10 +12,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.asus1.materialdesigndemo.R;
 
@@ -20,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -30,6 +37,83 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle(R.string.app_name);
+
+        FrameLayout imageView1 = (FrameLayout) findViewById(R.id.item1);
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "666", Toast.LENGTH_SHORT).show();
+            }
+        });
+        final RelativeLayout relativeLayout1 = (RelativeLayout) findViewById(R.id.bottom1);
+
+        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item1)), new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch swatch = palette.getVibrantSwatch();
+                if (swatch != null) {
+                    relativeLayout1.setBackgroundColor(swatch.getRgb());
+                }
+            }
+        });
+
+        FrameLayout imageView2 = (FrameLayout) findViewById(R.id.item2);
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "777", Toast.LENGTH_SHORT).show();
+            }
+        });
+        final RelativeLayout relativeLayout2 = (RelativeLayout) findViewById(R.id.bottom2);
+
+        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item2)), new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch swatch = palette.getVibrantSwatch();
+                if (swatch != null) {
+                    relativeLayout2.setBackgroundColor(swatch.getRgb());
+                }
+            }
+        });
+
+        FrameLayout imageView3 = (FrameLayout) findViewById(R.id.item3);
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "888", Toast.LENGTH_SHORT).show();
+            }
+        });
+        final RelativeLayout relativeLayout3 = (RelativeLayout) findViewById(R.id.bottom3);
+
+        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item3)), new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch swatch = palette.getVibrantSwatch();
+                if (swatch != null) {
+                    relativeLayout3.setBackgroundColor(swatch.getRgb());
+                }
+            }
+        });
+
+        FrameLayout imageView4 = (FrameLayout) findViewById(R.id.item4);
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "999", Toast.LENGTH_SHORT).show();
+            }
+        });
+        final RelativeLayout relativeLayout4 = (RelativeLayout) findViewById(R.id.bottom4);
+
+        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item4)), new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch swatch = palette.getVibrantSwatch();
+                if (swatch != null) {
+                    relativeLayout4.setBackgroundColor(swatch.getRgb());
+                }
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -105,5 +189,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private Bitmap drawableToBitamp(Drawable drawable) {
+        Bitmap bitmap;
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        bitmap = bd.getBitmap();
+        return bitmap;
     }
 }
