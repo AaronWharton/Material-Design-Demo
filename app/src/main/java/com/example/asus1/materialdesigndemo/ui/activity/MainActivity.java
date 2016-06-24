@@ -1,5 +1,7 @@
 package com.example.asus1.materialdesigndemo.ui.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,22 +40,29 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(R.string.app_name);
 
-        FrameLayout imageView1 = (FrameLayout) findViewById(R.id.item1);
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "666", Toast.LENGTH_SHORT).show();
-            }
-        });
+        final FrameLayout imageView1 = (FrameLayout) findViewById(R.id.item1);
         final RelativeLayout relativeLayout1 = (RelativeLayout) findViewById(R.id.bottom1);
-
+        final int[] s = new int[1];
         Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item1)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
                 if (swatch != null) {
                     relativeLayout1.setBackgroundColor(swatch.getRgb());
+                    s[0] = swatch.getRgb();
                 }
+            }
+        });
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getString(R.string.item1));
+                bundle.putInt("color", s[0]);
+                intent.putExtras(bundle);
+                startActivity(intent, ActivityOptions
+                        .makeSceneTransitionAnimation(MainActivity.this, relativeLayout1, "item").toBundle());
             }
         });
 
