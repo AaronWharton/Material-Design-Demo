@@ -7,9 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -42,14 +40,14 @@ public class MainActivity extends AppCompatActivity
 
         final FrameLayout imageView1 = (FrameLayout) findViewById(R.id.item1);
         final RelativeLayout relativeLayout1 = (RelativeLayout) findViewById(R.id.bottom1);
-        final int[] s = new int[1];
+        final int[] s1 = new int[1];
         Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item1)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
                 if (swatch != null) {
                     relativeLayout1.setBackgroundColor(swatch.getRgb());
-                    s[0] = swatch.getRgb();
+                    s1[0] = swatch.getRgb();
                 }
             }
         });
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title", getString(R.string.item1));
-                bundle.putInt("color", s[0]);
+                bundle.putInt("color", s1[0]);
                 intent.putExtras(bundle);
                 startActivity(intent, ActivityOptions
                         .makeSceneTransitionAnimation(MainActivity.this, relativeLayout1, "item").toBundle());
@@ -67,14 +65,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         FrameLayout imageView2 = (FrameLayout) findViewById(R.id.item2);
-        imageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "777", Toast.LENGTH_SHORT).show();
-            }
-        });
         final RelativeLayout relativeLayout2 = (RelativeLayout) findViewById(R.id.bottom2);
-
         Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item2)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
@@ -82,6 +73,17 @@ public class MainActivity extends AppCompatActivity
                 if (swatch != null) {
                     relativeLayout2.setBackgroundColor(swatch.getRgb());
                 }
+            }
+        });
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getString(R.string.item2));
+                intent.putExtras(bundle);
+                startActivity(intent, ActivityOptions
+                        .makeSceneTransitionAnimation(MainActivity.this, relativeLayout2, "item").toBundle());
             }
         });
 
@@ -120,15 +122,6 @@ public class MainActivity extends AppCompatActivity
                 if (swatch != null) {
                     relativeLayout4.setBackgroundColor(swatch.getRgb());
                 }
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 

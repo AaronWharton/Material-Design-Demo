@@ -10,4 +10,6 @@
     <dimen name="large_text">20sp</dimen>
     <dimen name="small_text">10sp</dimen>
     <dimen name="normal_text">16sp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

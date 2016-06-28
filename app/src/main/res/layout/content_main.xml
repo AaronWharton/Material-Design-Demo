@@ -55,6 +55,7 @@
 
             <RelativeLayout
                 android:id="@+id/bottom2"
+                android:transitionName="item"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
