@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         final FrameLayout imageView1 = (FrameLayout) findViewById(R.id.item1);
         final RelativeLayout relativeLayout1 = (RelativeLayout) findViewById(R.id.bottom1);
         final int[] s1 = new int[1];
-        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item1)), new Palette.PaletteAsyncListener() {
+        Palette.generateAsync(drawableToBitmap(getResources().getDrawable(R.drawable.item1)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity
 
         FrameLayout imageView2 = (FrameLayout) findViewById(R.id.item2);
         final RelativeLayout relativeLayout2 = (RelativeLayout) findViewById(R.id.bottom2);
-        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item2)), new Palette.PaletteAsyncListener() {
+        Palette.generateAsync(drawableToBitmap(getResources().getDrawable(R.drawable.item2)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         });
         final RelativeLayout relativeLayout3 = (RelativeLayout) findViewById(R.id.bottom3);
 
-        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item3)), new Palette.PaletteAsyncListener() {
+        Palette.generateAsync(drawableToBitmap(getResources().getDrawable(R.drawable.item3)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         });
         final RelativeLayout relativeLayout4 = (RelativeLayout) findViewById(R.id.bottom4);
 
-        Palette.generateAsync(drawableToBitamp(getResources().getDrawable(R.drawable.item4)), new Palette.PaletteAsyncListener() {
+        Palette.generateAsync(drawableToBitmap(getResources().getDrawable(R.drawable.item4)), new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch = palette.getVibrantSwatch();
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private Bitmap drawableToBitamp(Drawable drawable) {
+    private Bitmap drawableToBitmap(Drawable drawable) {
         Bitmap bitmap;
         BitmapDrawable bd = (BitmapDrawable) drawable;
         bitmap = bd.getBitmap();
